@@ -72,10 +72,9 @@ const Calendar = props => {
                                 : isSameDay(day, date) ? "selected" : ""
                             }`}
                         key={day}
-                        onClick={() => onDateClick(parse(cloneDay))}
+                        onClick={() => onDateClick(cloneDay)}
                     >
                         <span className="number">{formattedDate}</span>
-                        {/* <span className="bg">{formattedDate}</span> */}
                     </div>
                 );
                 day = addDays(day, 1);
@@ -90,7 +89,9 @@ const Calendar = props => {
         return <div className="body">{rows}</div>;
     }
 
-    const onDateClick = day => { };
+    const onDateClick = day => { 
+        console.log({day})
+    };
 
     const nextMonth = () => {
         //Set the next month

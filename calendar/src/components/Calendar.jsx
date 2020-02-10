@@ -8,7 +8,9 @@ import {
     endOfMonth,
     isSameMonth,
     isSameDay,
-    parse
+    parse,
+    addMonths,
+    subMonths
 } from "date-fns"
 import PropTypes from 'prop-types'
 
@@ -20,7 +22,7 @@ const Calendar = props => {
         return (
             <div className="header row flex-middle">
                 <div className="col col-start">
-                    <div className="icon" onClick={prevMonth}>
+                    <div className="icon" onClick={()=>prevMonth()}>
                         chevron_left
               </div>
                 </div>
@@ -29,7 +31,7 @@ const Calendar = props => {
                         {format(date, dateFormat)}
                     </span>
                 </div>
-                <div className="col col-end" onClick={nextMonth}>
+                <div className="col col-end" onClick={()=>nextMonth()}>
                     <div className="icon">chevron_right</div>
                 </div>
             </div>
@@ -89,16 +91,18 @@ const Calendar = props => {
         return <div className="body">{rows}</div>;
     }
 
-    const onDateClick = day => { 
-        console.log({day})
+    const onDateClick = day => {
+        console.log({ day })
     };
 
     const nextMonth = () => {
         //Set the next month
+        setDate(addMonths(date, 1))
     };
 
     const prevMonth = () => {
         // Set in state prev month
+        setDate(subMonths(date, 1))
     };
     return (
         <div style={{ backgroundColor: "black" }}>

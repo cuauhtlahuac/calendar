@@ -1,9 +1,10 @@
 .App {
   text-align: center;
-  background: brown;
+  background: black;
   margin: 0 auto;
   height: 80vh;
   width: 80vw;
+
 }
 /* FONT IMPORTS */
 
@@ -33,7 +34,7 @@
 
 :root {
   --main-color: #1a8fff;
-  --text-color: #700;
+  --text-color: #a59;
   --text-color-light: #ccc;
   --border-color: #eee;
   --bg-color: #f9f9f9;

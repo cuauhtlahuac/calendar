@@ -11,11 +11,27 @@ function App() {
 				<span>
 					react<b>calendar</b>
 				</span>
+
 				<h1>CALENDAR</h1>
 			</header>
 			<main>
+				<div
+					style={{
+						display: 'flex',
+						position: 'absolute',
+						zIndex: 1,
+						width: '100vw',
+						height: '100vh',
+						background: '#005b',
+						top: 0,
+						left: 0,
+						alignItems: "center",
+						justifyContent: "center"
+					}}
+				>
+					<Reminder />
+				</div>
 				<Calendar />
-				<Reminder />
 			</main>
 		</div>
 	);

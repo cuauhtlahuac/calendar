@@ -18,9 +18,12 @@ import PropTypes from 'prop-types';
 
 const Calendar = (props) => {
 	const [ date, setDate ] = useState(new Date());
+	const [ stateMonth, setMonth ] = useState(null);
+	const [ stateDay, setDay ] = useState(null);
 
 	function renderHeader(context) {
 		const dateFormat = 'MMMM yyyy';
+		setMonth(format(date, dateFormat));
 		return (
 			<div className="header row flex-middle">
 				<div className="col col-start">
@@ -29,7 +32,7 @@ const Calendar = (props) => {
 					</div>
 				</div>
 				<div className="col col-center">
-					<span>{format(date, dateFormat)}</span>
+					<span>{stateMonth}</span>
 				</div>
 				<div className="col col-end" onClick={() => nextMonth()}>
 					<div className="icon">chevron_right</div>
@@ -89,6 +92,7 @@ const Calendar = (props) => {
 		return <div className="body">{rows}</div>;
 	}
 	const onDateClick = (day, context) => {
+		setDay(day);
 		context.showReminders(true);
 	};
 	const nextMonth = () => {
@@ -108,7 +112,6 @@ const Calendar = (props) => {
 						{context.showReminderModal ? <h1>Show</h1> : null}
 						<div>{renderHeader(context)}</div>
 						<div>{renderDays(context)}</div>
-
 						<div>{renderCells(context)}</div>
 					</div>
 				);

@@ -11,13 +11,16 @@ function App() {
 	const [ showRemindersModal, setRemindersModal ] = useState(false);
 	useEffect(
 		() => {
+			setReminders([{hey: "okod"}]);
 			return () => {};
 		},
-		[ reminders ]
+		[  ]
 	);
 	const addReminderToCalendar = (reminder) => {
-		console.log('add reminder' + reminder);
-		reminder = {};
+		let reminderList = reminders;
+		reminderList.push({ hola: 'ola' });
+		setReminders(reminderList);
+		console.log({ reminders });
 	};
 	const deleteReminderToCalendar = (reminderId) => {
 		console.log('delete reminder ' + reminderId);
@@ -36,12 +39,11 @@ function App() {
 					addReminderToCalendar,
 					deleteReminderToCalendar,
 					showReminder,
-					showReminders,
+					showReminders
 				}}
 			>
 				<header>
 					<h1>CALENDAR</h1>
-					<p> {JSON.stringify(showReminderModal)} </p>
 				</header>
 				<main>
 					<div

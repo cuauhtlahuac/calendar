@@ -62,6 +62,7 @@ const Reminder = (props) => {
 						<button
 							onClick={() => {
 								context.showReminder(false);
+								context.addReminderToCalendar()
 							}}
 						>
 							create

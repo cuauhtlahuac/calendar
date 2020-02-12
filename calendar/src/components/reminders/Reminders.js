@@ -26,14 +26,13 @@ const Reminders = (props) => {
 							style={{
 								display: 'flex',
 								flexDirection: 'column',
-								// maxWidth: '30%',
 								background: 'white',
 								padding: '2rem',
 								margin: '0 auto',
 								borderRadius: '1rem'
 							}}
 						>
-							{JSON.stringify(context)}
+							<p style={{ color: 'black' }}>{JSON.stringify(context.reminders)}</p>
 						</div>
 					</div>
 				</div>

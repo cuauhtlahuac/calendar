@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../App.css';
+import CalendarContext from '../../context/CalendarContext';
 import {
 	format,
 	startOfWeek,
@@ -18,7 +19,7 @@ import PropTypes from 'prop-types';
 const Calendar = (props) => {
 	const [ date, setDate ] = useState(new Date());
 
-	function renderHeader() {
+	function renderHeader(context) {
 		const dateFormat = 'MMMM yyyy';
 		return (
 			<div className="header row flex-middle">
@@ -35,9 +36,9 @@ const Calendar = (props) => {
 				</div>
 			</div>
 		);
-    }
+	}
 
-	function renderDays() {
+	function renderDays(context) {
 		const dateFormat = 'EEEE';
 		const days = [];
 		let startDate = startOfWeek(date);
@@ -51,7 +52,7 @@ const Calendar = (props) => {
 		return <div className="days row">{days}</div>;
 	}
 
-	function renderCells() {
+	function renderCells(context) {
 		const monthStart = startOfMonth(date);
 		const monthEnd = endOfMonth(monthStart);
 		const startDate = startOfWeek(monthStart);
@@ -71,7 +72,7 @@ const Calendar = (props) => {
 							? 'disabled'
 							: isSameDay(day, date) ? 'selected' : ''}`}
 						key={day}
-						onClick={() => onDateClick(cloneDay)}
+						onClick={() => onDateClick(cloneDay, context)}
 					>
 						<span className="number">{formattedDate}</span>
 					</div>
@@ -87,11 +88,9 @@ const Calendar = (props) => {
 		}
 		return <div className="body">{rows}</div>;
 	}
-
-	const onDateClick = (day) => {
-		console.log({ day });
+	const onDateClick = (day, context) => {
+		context.showReminders(true);
 	};
-
 	const nextMonth = () => {
 		//Set the next month
 		setDate(addMonths(date, 1));
@@ -102,11 +101,19 @@ const Calendar = (props) => {
 		setDate(subMonths(date, 1));
 	};
 	return (
-		<div className="calendar">
-			<div>{renderHeader()}</div>
-			<div>{renderDays()}</div>
-			<div>{renderCells()}</div>
-		</div>
+		<CalendarContext.Consumer>
+			{(context) => {
+				return (
+					<div className="calendar">
+						{context.showReminderModal ? <h1>Show</h1> : null}
+						<div>{renderHeader(context)}</div>
+						<div>{renderDays(context)}</div>
+
+						<div>{renderCells(context)}</div>
+					</div>
+				);
+			}}
+		</CalendarContext.Consumer>
 	);
 };
 

@@ -38,7 +38,7 @@ const Calendar = (props) => {
     }
 
 	function renderDays() {
-		const dateFormat = 'dddd';
+		const dateFormat = 'EEEE';
 		const days = [];
 		let startDate = startOfWeek(date);
 		for (let i = 0; i < 7; i++) {
@@ -104,7 +104,7 @@ const Calendar = (props) => {
 	return (
 		<div className="calendar">
 			<div>{renderHeader()}</div>
-			<div>{date.getDate()}</div>
+			<div>{renderDays()}</div>
 			<div>{renderCells()}</div>
 		</div>
 	);
